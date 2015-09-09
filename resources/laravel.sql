@@ -1,41 +1,12 @@
--- phpMyAdmin SQL Dump
--- version 4.2.10.1
--- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 2015-07-02 22:55:52
--- 服务器版本： 5.5.28
--- PHP Version: 5.4.13
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
+-- Table `city_cn`
 --
--- Database: `demo`
---
-
--- --------------------------------------------------------
-
---
--- 表的结构 `city_cn`
---
-
 DROP TABLE IF EXISTS `city_cn`;
 CREATE TABLE IF NOT EXISTS `city_cn` (
   `city_code` varchar(6) NOT NULL,
   `city_name` varchar(20) NOT NULL,
   `prov_code` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `city_cn`
---
 
 INSERT INTO `city_cn` (`city_code`, `city_name`, `prov_code`) VALUES
 ('321200', '镇江市', '320000'),
@@ -110,41 +81,6 @@ CREATE TABLE IF NOT EXISTS `road_cn` (
   `district_code` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `account`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` varchar(66) NOT NULL,
-  `account` varchar(30) NOT NULL,
-  `password` varchar(66) NOT NULL,
-  `nickname` varchar(60) NULL,
-  `cellphone` varchar(20) NULL,
-  `email` varchar(50) NOT NULL,
-  `created_at` int(15) NOT NULL,
-  `updated_at` int(15) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0:deleted,1:active,2:inactive,3:locked,',
-  `role_type` varchar(10) NOT NULL DEFAULT '' COMMENT '',
-  `id_card_no` varchar(30),
-  `memo` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`acct_no`),
-  UNIQUE KEY `account` (`account`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `account`
---
-
-INSERT INTO `account` (`acct_no`, `acct_name`, `password`, `cellphone`, `email`, `create_time`, `status`, `role_type`, `memo`) VALUES
-('a23306dab4c710a331d8758f6394ea1fad34b19d', 'luangng', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, 'luangng916@gmail.com', 1436340766, 1, NULL, NULL);
-
---
--- Indexes for dumped tables
---
-
 --
 -- Indexes for table `city_cn`
 --
@@ -178,16 +114,33 @@ ALTER TABLE `road_cn`
 --
 -- Indexes for table `users`
 --
---
--- 表的结构 `userinfo`
---
 
-CREATE TABLE IF NOT EXISTS `userinfo` (
-  `id_card_num` varchar(30) NOT NULL DEFAULT '' COMMENT 'id card num',
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE IF NOT EXISTS  `account` (
+  `ac_id` varchar(66) NOT NULL COMMENT 'account id',
+  `username` varchar(30) NOT NULL COMMENT 'user name',
+  `nickname` varchar(50) NUll COMMENT 'front-end page will show this name if it exists',
+  `password` varchar(66) NOT NULL COMMENT 'password',
+  `mobile_phone` varchar(20) NULL COMMENT 'users\' cellphone',
+  `email` varchar(60) NOT NULL COMMENT 'email',
+  `status` int(2) NOT NULL DEFAULT '0' COMMENT '0:not actived, 1:actived, 3:locked, 4:canceled',
+  `created_time` bigint(12) NOT NULL COMMENT 'date & time account created display in unix timestamp',
+  `role_type` int(2) NOT NULL DEFAULT '0' COMMENT 'account role type',
+  `last_signin_time` bigint(12) NOT NULL COMMENT 'last sign in date time display in unix timestamp',
+  `last_signin_ip` varchar(16) NOT NULL COMMENT 'last sign in ip address',
+  `remark` varchar(200) NULL DEFAULT '',
+  PRIMARY KEY(`ac_id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` varchar(30) NOT NULL DEFAULT '' COMMENT 'id card num',
   `realname` varchar(50) NOT NULL COMMENT 'user''s realname',
   `gender` int(1) NOT NULL DEFAULT '0' COMMENT '1:male, 0; female',
   `age` int(2) NOT NULL DEFAULT '18' COMMENT 'age',
-  `birth` int(15) DEFAULT NULL COMMENT 'birthday',
+  `birth` bigint(15) DEFAULT NULL COMMENT 'birthday',
+  `id_card` varchar(20) NUll COMMENT 'id card number',
   `addr` varchar(30) DEFAULT NULL COMMENT 'address',
   `education` varchar(10) DEFAULT NULL COMMENT 'education',
   `graduate_school` varchar(10) DEFAULT NULL COMMENT 'advanced graduate degree',
@@ -195,12 +148,9 @@ CREATE TABLE IF NOT EXISTS `userinfo` (
   `prov_code` varchar(8) DEFAULT NULL COMMENT 'province belong to(get prov by reg ip)',
   `city_code` varchar(8) DEFAULT NULL COMMENT 'city code(get city code by reg ip)',
   `post_code` varchar(10) DEFAULT NULL COMMENT 'post code num',
-  PRIMARY KEY (`id_card_num`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `userinfo`
---
 
-INSERT INTO `userinfo` (`id_card_num`, `realname`, `gender`, `age`, `birth`, `addr`, `education`, `graduate_school`, `nationality`, `prov_code`, `city_code`, `post_code`) VALUES
-('320562198506126853', '张三', 1, 28, 1356265235, '江苏省南京市玄武区徐庄软件园699-8', '本科', '南京大学', '中国', '320000', '321100', '210000');
+
+

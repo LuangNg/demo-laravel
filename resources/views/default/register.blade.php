@@ -3,21 +3,23 @@
 {{-- All CSS files should put here --}}
 @section('styles')
 <!-- the preferred alternate style sheet -->
-<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" title="Bootstrap CSS">
+<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}" title="Bootstrap CSS">
 @endsection
 
-{{-- Main Content --}}
+{{--Main
+    Content--}}
 @section('content')
 <form action="auth/register" method="post" name="regist-by-email">
+    <input type="hidden" name="_token" value="{{ csrf_token()}}" />
     <div class="form-group has-success has-feedback">
-        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="account" name="account" placeholder="Your account" data-toggle="popover" data-placement="right" title="Msg" data-content="Please input username!" />
+        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="username" name="username" placeholder="Your account" data-toggle="popover" data-placement="right" title="Msg" data-content="Please input username!" />
         <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
     </div>
     <div class="form-group">
         <input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="password" name="password" placeholder="Password" ng-minlength="8" ng-maxlength="20" data-toggle="popover" data-placement="right" title="Tip" data-content="Password need at least 8 charactors!" />
     </div>
     <div class="form-group">
-        <input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="confpassword" name="confpassword" placeholder="Comfirm Password" data-toggle="popover" data-placement="right" title="Msg" data-content="New password must be the same with confirm password" />
+        <input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="confirmPassword" name="confirmPassword" placeholder="Comfirm Password" data-toggle="popover" data-placement="right" title="Msg" data-content="New password must be the same with confirm password" />
     </div>
     <div class="form-group has-error has-feedback">
         <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="Emaill Addr" data-toggle="popover" data-placement="right" title="tip" data-content="Your email address" />
@@ -33,7 +35,7 @@
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox" name="agreement" value="1" id="agreement">I accept the promtion<a href="###">《xxx Service Protocol》</a>
+            <input type="checkbox" id="agreement" name="agreement" value="1">I accept the promtion<a href="###">《xxx Service Protocol》</a>
         </label>
     </div>
     <div class="regist-way">                                   
@@ -43,6 +45,6 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('assets/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
 @endsection

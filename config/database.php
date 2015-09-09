@@ -72,7 +72,7 @@ return [
                 'host' => '127.0.0.1'
             ],
             'driver'    => 'mysql',
-            'database'  => 'demo',
+            'database'  => 'laravel',
             'username'  => 'root',
             'password'  => '123456',
             'charset'   => 'utf8',

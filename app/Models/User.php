@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Account extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
-    protected $primaryKey = 'user_id';
+    protected $table = 'account';
+    protected $primaryKey = 'ac_id';
     protected $timestamps = true;
 
     /**
