@@ -149,7 +149,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `city_code` varchar(8) DEFAULT NULL COMMENT 'city code(get city code by reg ip)',
   `post_code` varchar(10) DEFAULT NULL COMMENT 'post code num',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
 
 
 

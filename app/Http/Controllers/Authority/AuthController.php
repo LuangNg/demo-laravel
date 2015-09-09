@@ -43,8 +43,6 @@ class AuthController extends Controller {
 //                                [$account, $password]);
         $user = DB::table('account')
                 ->where('username', '=', $username)
-                ->where('password', '=', $password)
-                ->where('status', '=', '1')
                 ->get();
         return $user;
     }
@@ -55,27 +53,35 @@ class AuthController extends Controller {
      * @return string
      */
     public function register(Request $request) {
+        //get date from front-end form
         $username = $request->input('username');
         $password = $request->input('password');
         $confirmPassword = $request->input('confirmPassword');
         $email = $request->input('email');
         $agreement = $request->input('agreement');
-        if($password != $confirmPassword){
+
+        //check if agree with the protocal
+        if (!isset($agreement) || $agreement != '1') {
+            return 'pls read the protocal.';
+        }
+
+        if ($password != $confirmPassword) {
             return 'Confirm password does not match password you input.';
         }
+
         //verify if the account has exist
-        $user = $this -> verifyUserIfExist($username, $password);
-        if (is_null($user)) {
+        $user = $this->verifyUserIfExist($username, $password);
+        if (count($user) > 0) {
             return 'The account does exsit, pls go to sign in.';
         }
-//        $date = new DateTime('NOW');
-        $timestamp = '123456';
-        //put user's register data into table accout
+
+        $timestamp = time();
+        //write register data into table accout
         DB::table('account')->insert(
                 [
                     'ac_id' => sha1($timestamp),
                     'username' => $username,
-                    'password' => $password,
+                    'password' => sha1($password),
                     'email' => $email,
                     'status' => '1',
                     'created_time' => $timestamp,
@@ -95,30 +101,15 @@ class AuthController extends Controller {
     public function signIn(Request $request) {
         $username = $request->input('username');
         $password = $request->input('password');
-        $email = $request->input('email');
-        $agreement = $request->input('agreement');
-        //verify if the account has exist
-        $user = verifyUserIfExist($account, $password);
-        if (is_null($user)) {
-            return 'The account does exsit, pls go to sign in.';
+        $user = DB::table('account')
+                ->where('username', '=', $username)
+                ->where('password', '=', sha1($password))
+                ->get();
+        if (count($user) == 1) {
+            return 'Welcome '.$user[0]->nickname;
+        } else {
+            return 'failed';
         }
-        $date = new DateTime();
-        $timestamp = $date->getTimestamp();
-        //put user's register data into table accout
-        DB::table('account')->insert(
-                [
-                    'ac_id' => sha1($timestamp),
-                    'username' => $username,
-                    'password' => $password,
-                    'email' => $email,
-                    'status' => '1',
-                    'created_time' => $timestamp,
-                    'role_type' => '1',
-                    'last_signin_time' => $timestamp,
-                    'last_signin_ip' => '127.0.0.1',
-                ]
-        );
-        return 'success';
     }
 
     /**

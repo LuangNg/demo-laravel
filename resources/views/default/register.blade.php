@@ -12,7 +12,7 @@
 <form action="auth/register" method="post" name="regist-by-email">
     <input type="hidden" name="_token" value="{{ csrf_token()}}" />
     <div class="form-group has-success has-feedback">
-        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="username" name="username" placeholder="Your account" data-toggle="popover" data-placement="right" title="Msg" data-content="Please input username!" />
+        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="username" name="username" placeholder="User Name" data-toggle="popover" data-placement="right" title="Msg" data-content="Please input username!" />
         <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
     </div>
     <div class="form-group">
@@ -22,7 +22,7 @@
         <input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="confirmPassword" name="confirmPassword" placeholder="Comfirm Password" data-toggle="popover" data-placement="right" title="Msg" data-content="New password must be the same with confirm password" />
     </div>
     <div class="form-group has-error has-feedback">
-        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="Emaill Addr" data-toggle="popover" data-placement="right" title="tip" data-content="Your email address" />
+        <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="E-mail Address" data-toggle="popover" data-placement="right" title="tip" data-content="Your email address" />
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
     </div>
     <div class="form-group has-feedback">
@@ -35,11 +35,11 @@
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox" id="agreement" name="agreement" value="1">I accept the promtion<a href="###">《xxx Service Protocol》</a>
+            <input type="checkbox" id="agreement" name="agreement" value="1" />I accept the promtion<a href="###">《xxx Service Protocol》</a>
         </label>
     </div>
     <div class="regist-way">                                   
-        <input type="submit" id="submit" class="btn btn-primary btn-lg btn-block" value="Sign On" />
+        <input type="submit" id="submit" class="btn btn-primary btn-lg btn-block" value="Register Now" />
     </div>
 </form>
 @endsection
@@ -47,4 +47,6 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('assets/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('assets/angular.min.js')}}"></script>
+<script type="text/javascript" src="./js/register.js"></script>
 @endsection

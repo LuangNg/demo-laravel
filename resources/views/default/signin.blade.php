@@ -18,7 +18,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" id="account" class="form-control input-md txt-input" name="account" data-trigger="focus" value="" data-toggle="tooltip" placeholder="username" data-placement="right" title="Please input your username!" />
+                        <input type="text" id="username" class="form-control input-md txt-input" name="username" data-trigger="focus" value="" data-toggle="tooltip" placeholder="username" data-placement="right" title="Please input your username!" />
                     </div>
                 </div>
 
