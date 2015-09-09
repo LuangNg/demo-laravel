@@ -63,7 +63,7 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],*/
-
+        
         'mysql' => [
             'read' => [
                 'host' => '127.0.0.1',
