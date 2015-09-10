@@ -3,13 +3,12 @@
 {{-- All CSS files should put here --}}
 @section('styles')
 <!-- the preferred alternate style sheet -->
-<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}" title="Bootstrap CSS">
+<!--<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css')}}" title="Bootstrap CSS">-->
 @endsection
 
-{{--Main
-    Content--}}
+{{--Main Content--}}
 @section('content')
-<form action="auth/register" method="post" name="regist-by-email">
+<form action="auth/register" method="post" name="regist-by-email" ng-app>
     <input type="hidden" name="_token" value="{{ csrf_token()}}" />
     <div class="form-group has-success has-feedback">
         <input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="username" name="username" placeholder="User Name" data-toggle="popover" data-placement="right" title="Msg" data-content="Please input username!" />
@@ -35,7 +34,7 @@
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox" id="agreement" name="agreement" value="1" />I accept the promtion<a href="###">《xxx Service Protocol》</a>
+            <input type="checkbox" id="agreement" name="agreement" value="0" />I accept the promtion<a href="###">《xxx Service Protocol》</a>
         </label>
     </div>
     <div class="regist-way">                                   
@@ -48,5 +47,5 @@
 <script type="text/javascript" src="{{ asset('assets/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/angular.min.js')}}"></script>
-<script type="text/javascript" src="./js/register.js"></script>
+<script type="text/javascript" src="{{ asset('js/register.js')}}"></script>
 @endsection

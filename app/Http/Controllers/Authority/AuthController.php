@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authority;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller {
@@ -101,12 +102,14 @@ class AuthController extends Controller {
     public function signIn(Request $request) {
         $username = $request->input('username');
         $password = $request->input('password');
+        //log the sign in action
+        Log::info('A request from IP:"' . $request->ip() . '" try to sign in with username:"' . $username . '".');
         $user = DB::table('account')
                 ->where('username', '=', $username)
                 ->where('password', '=', sha1($password))
                 ->get();
         if (count($user) == 1) {
-            return 'Welcome '.$user[0]->nickname;
+            return 'Welcome ' . $user[0]->nickname;
         } else {
             return 'failed';
         }
